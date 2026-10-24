@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Главная{% endblock %} · TaskFlow</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-$END$
+
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">TaskFlow</a>
+
+    <nav class="nav" aria-label="Основное меню">
+      {% for item in nav_items %}
+        <a href="{{ item.url }}"{% if item.key == active %} class="active" aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="lang" aria-label="Язык интерфейса">
+      <a href="#" class="active">RU</a>
+      <a href="#">EN</a>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    TaskFlow · информационная система ведения задач и проектов · курсовой проект по КПО
+  </footer>
+
 </body>
 </html>

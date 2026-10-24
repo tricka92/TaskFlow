@@ -1,10 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+
+  <!-- Приветствие и быстрые действия -->
+  <section class="hero">
+    <div>
+      <h1>Добрый день!</h1>
+      <p class="muted">Воскресенье, 18 октября · семестр «Осень 2026» · демо-данные</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-primary" href="{{ url_for('page', page='projects') }}">+ Проект</a>
+      <a class="btn btn-primary" href="{{ url_for('page', page='projects') }}">+ Задача</a>
+      <a class="btn" href="{{ url_for('page', page='templates') }}">Загрузить шаблон семестра</a>
+      <a class="btn" href="{{ url_for('page', page='plan') }}">Пересобрать план</a>
+      <a class="btn" href="{{ url_for('page', page='reports') }}">Сформировать отчёт</a>
+    </div>
+  </section>
+
+  <!-- Сводка -->
+  <section class="stats" aria-label="Сводка">
+    <div class="card stat">
+      <span class="stat-value">68</span>
+      <span class="stat-label">всего задач</span>
+    </div>
+    <div class="card stat">
+      <span class="stat-value">12</span>
+      <span class="stat-label">выполнено</span>
+    </div>
+    <div class="card stat stat-danger">
+      <span class="stat-value">9</span>
+      <span class="stat-label">в долгу</span>
+    </div>
+    <div class="card stat">
+      <span class="stat-value">7 <small>из 5 ч</small></span>
+      <span class="stat-label">нагрузка на сегодня</span>
+    </div>
+  </section>
+
+  <div class="layout">
+
+    <!-- Левая колонка -->
+    <div class="column">
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Сегодня делаю</h2>
+          <a href="{{ url_for('page', page='today') }}">Открыть →</a>
+        </div>
+        <ul class="task-list">
+          <li>
+            <input type="checkbox" id="t1" disabled>
+            <label for="t1"><span class="tag">СП</span> №6</label>
+            <span class="muted">2 ч · сдать 20.10</span>
+          </li>
+          <li>
+            <input type="checkbox" id="t2" disabled>
+            <label for="t2"><span class="tag">САУ</span> №5</label>
+            <span class="muted">3 ч · сдать 23.10</span>
+          </li>
+          <li>
+            <input type="checkbox" id="t3" disabled>
+            <label for="t3"><span class="tag">КПО</span> №5</label>
+            <span class="muted">2 ч · сдать 19.10</span>
+            <span class="badge badge-danger">долг</span>
+          </li>
+        </ul>
+        <p class="hint">Не успел? Отметь задачу невыполненной, и план пересоберётся.</p>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Проекты</h2>
+          <a href="{{ url_for('page', page='projects') }}">Все проекты →</a>
+        </div>
+        <ul class="progress-list">
+          <li>
+            <span>КПО</span>
+            <progress value="4" max="11"></progress>
+            <span class="muted">4 из 11</span>
+          </li>
+          <li>
+            <span>СП</span>
+            <progress value="5" max="12"></progress>
+            <span class="muted">5 из 12</span>
+          </li>
+          <li>
+            <span>САУ</span>
+            <progress value="2" max="11"></progress>
+            <span class="muted">2 из 11</span>
+          </li>
+          <li>
+            <span>ОИБ</span>
+            <progress value="3" max="8"></progress>
+            <span class="muted">3 из 8</span>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+
+    <!-- Правая колонка -->
+    <div class="column">
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Ближайшие сдачи</h2>
+          <a href="{{ url_for('page', page='plan') }}">План →</a>
+        </div>
+        <ul class="deadline-list">
+          <li><strong>19.10</strong> КПО №4, КПО №5</li>
+          <li><strong>20.10</strong> СП №6, СП №7</li>
+          <li><strong>21.10</strong> ОИБ №6</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Нагрузка на неделю</h2>
+        </div>
+        <div class="bars" aria-label="Часы по дням недели, лимит 5 часов">
+          <div class="bar"><span style="--h: 70%"></span><small>Пн</small></div>
+          <div class="bar"><span style="--h: 70%"></span><small>Вт</small></div>
+          <div class="bar"><span style="--h: 70%"></span><small>Ср</small></div>
+          <div class="bar"><span style="--h: 70%"></span><small>Чт</small></div>
+          <div class="bar"><span style="--h: 0%"></span><small>Пт</small></div>
+          <div class="bar"><span style="--h: 0%"></span><small>Сб</small></div>
+          <div class="bar bar-over"><span style="--h: 100%"></span><small>Вс</small></div>
+        </div>
+        <p class="hint">Красный столбец: на этот день запланировано больше лимита.</p>
+      </section>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Отчёты</h2>
+          <a href="{{ url_for('page', page='reports') }}">Все отчёты →</a>
+        </div>
+        <ul class="link-list">
+          <li><a href="{{ url_for('page', page='reports') }}">Отчёт по проекту</a></li>
+          <li><a href="{{ url_for('page', page='reports') }}">Отчёт по долгам</a></li>
+          <li><a href="{{ url_for('page', page='reports') }}">Отчёт за период</a></li>
+        </ul>
+      </section>
+
+    </div>
+  </div>
+
+{% endblock %}

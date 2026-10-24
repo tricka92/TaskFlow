@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<section class="card stub">
+  <h1>{{ title }}</h1>
+  <p class="muted">Страница в разработке.</p>
+  <p>{{ description }}</p>
+  <a class="btn" href="{{ url_for('index') }}">← На главную</a>
+</section>
+{% endblock %}
